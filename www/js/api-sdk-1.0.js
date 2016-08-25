@@ -22,15 +22,15 @@ function requestHandlerAPI(){
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
-	window.api_base_url = "https://3dedalo.org/rest/v1/";
+	window.api_base_url = "https://airelibre.devtdc.online/rest/v1/";
 	/* Development local API URL */
-	// window.api_base_url = "http://dedalo.dev/rest/v1/";
+	window.api_base_url = "http://airelibre.dev/rest/v1/";
 	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
 	
 	this.ls = window.localStorage;
 	/* Constructor */
 	this.construct = function(app_context){
-					console.log('Initialized rest API Dedalo sdk v1.2');
+					console.log('Initialized rest API AireLibre sdk v1.2');
 					if(this.ls.getItem('request_token')) this.token = this.ls.getItem('request_token');
 					sdk_app_context = app_context;
 					/* For chaining purposes ::) */
@@ -152,7 +152,7 @@ function requestHandlerAPI(){
 		this.save_user_data_clientside = function(data){
 											var user_role = data.role;
 											if(user_role == 'administrator') user_role = 'maker';
-											this.ls.setItem('dedalo_log_info', 	JSON.stringify({
+											this.ls.setItem('airelibre_log_info', 	JSON.stringify({
 																					user_login: 	data.user_login,
 																					username: 		data.user_login,
 																					user_id: 		data.user_id,
@@ -219,10 +219,10 @@ function requestHandlerAPI(){
 							if(this.token !== undefined || this.token !== ''){
 
 								console.log("Looks like you already have a token, let's check if it is valid");
-								var dedalo_log_info = (typeof this.ls.getItem('dedalo_log_info') != undefined) ? JSON.parse(this.ls.getItem('dedalo_log_info')) : null;
-								if(!dedalo_log_info) return false;
+								var airelibre_log_info = (typeof this.ls.getItem('airelibre_log_info') != undefined) ? JSON.parse(this.ls.getItem('airelibre_log_info')) : null;
+								if(!airelibre_log_info) return false;
 
-									var user 		= dedalo_log_info.user_id;
+									var user 		= airelibre_log_info.user_id;
 									var data_object =   {
 															user_id : user, 
 															request_token : apiRH.get_request_token(),

@@ -153,6 +153,10 @@ article div.pod-img span {top:34.5%;}
 .pod-play {position:absolute;bottom:5px;right:10px;}
 .more-posts {height:58px;background:#000;color:#FFF;line-height:58px;width:100%;position:absolute;bottom:0px;font-size:120%;left:0px;}
 
+.head_image{width: 100%; height: auto; display: block;}
+.column_page h1{position: absolute; top: 2rem; left: 2rem; color: #FFF; letter-spacing: 1px; text-transform: uppercase;}
+.column_page .content {padding: 4rem 2.5rem; width: 100%; text-align: left; line-height: 2.6rem; letter-spacing: 0.6px; color: #656464;}
+
 /* INDEX */
 
 section.index {background:#eef1f6;}
@@ -170,7 +174,8 @@ a.in-boton svg.blue {fill:#0245ff;}
 section.login {padding:15px;}
 .login img {width:36%;height:auto;margin:5px 0px 23px;}
 .login input {width:100%;margin:9px 0px;outline:none;background:none;border:none;border-radius:8px;height:42px;padding:10px;font-family:'Regular';text-transform:uppercase;letter-spacing:0.03em;}
-input[type="text"] {color:#5b5b5b;border:1px solid #9b9b9b;}
+input[type="text"],
+input[type="password"] {color:#5b5b5b;border:1px solid #9b9b9b;}
 input[type="submit"] {background:#202835;color:#FFF;}
 input[type="button"] {background:#33649e;color:#FFF;}
 ::-webkit-input-placeholder {color:#e3e3e3;}

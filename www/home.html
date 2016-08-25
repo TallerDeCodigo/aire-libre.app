@@ -9,28 +9,30 @@
 		<link rel="stylesheet" type="text/css" href="style.css">
 	</head>
 	<body>
-		<div class="container">
+		<section class="container">
 			
-		</div>
+		</section>
 	</body>
 
 	<!-- Load Scripts -->
     <script src="js/bower_components/handlebars/handlebars.min.js"></script>
     <script src="js/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="views/compiled/partials/header.js"></script>
+    <script src="views/compiled/partials/nowplaying.js"></script>
+    <!-- <script src="views/compiled/home.js"></script> -->
 	<script src="js/plugins.js"></script>
-	<script src="views/compiled/partials/header.js"></script>
-	<!-- <script src="views/compiled/login.js"></script> -->
 	<script src="js/api-sdk-1.0.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
 	<script type="text/javascript" src="js/oauth.js"></script>
 	<script src="js/main.js"></script>
+
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
 		window.is_home = true;
 		app.initialize();
-	</script>
-	<script type="text/javascript">
-		app.render_login();
+		// if(!loggedIn)
+		// 	app.render_login();
+		app.render_home();
 		app.showLoader();
 	</script>
 
