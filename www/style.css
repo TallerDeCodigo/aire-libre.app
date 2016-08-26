@@ -227,5 +227,49 @@ section.radio {background:#7e7e7e;position:absolute;width:100%;height:100%;overf
 .slide-item {position:relative;display:inline-block;overflow:hidden;margin-right:-4px;}
 .slide-item:not(:first-of-type) img {height:92%}
 
+/*Loader*/
 
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.loader_container{
+	width: 100%;
+    height: 100vh;
+    display: block;
+    display: none;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(90,90,90,0.35);
+}
 
+.loading {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  margin: 44vh auto;
+  display: block;
+  border-radius: 50%;
+  border: 0.45rem solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  -webkit-animation: spin 1s infinite linear;
+          animation: spin 1s infinite linear;
+}

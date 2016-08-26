@@ -67,7 +67,7 @@
 		registerCompiledPartials: function() {
 			console.log("Register pre compiled partials");
 			/* Add files to be loaded here */
-			var filenames = ['header', 'nowplaying'];
+			var filenames = ['header', 'nowplaying', 'loader'];
 			
 			filenames.forEach(function (filename) {
 					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
