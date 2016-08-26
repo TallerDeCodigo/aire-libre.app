@@ -1,61 +1,42 @@
-	{{> header}}
-	<div class="overscreen" style="display:none">
-	<div class="fitted"></div>
-		<nav class="menu">
-			<div class="header">
-				<a href="#">
-					<div class="profile-img">
-						{{# me.profile_pic}}
-							<img src="{{.}}">
-						{{/ me.profile_pic}}
+	<section class="view">
+		{{> header}}
+		{{> sidemenu}}
 
-						{{^ me.profile_pic}}
-							<img src="images/menu1.png">
-						{{/ me.profile_pic}}
-					</div>
-					<div class="profile-name">Hola {{me.first_name}} {{me.last_name}}</div>
-				</a>
+		<header class="white-bar">
+			<div class="toolbar">
+				<a class="head-btn menu"><svg viewBox="0 0 42 42"><use xlink:href="#menu"></use></svg></a>
+				<h2 class="titulo">INICIO</h2>
+				<a class="head-btn search"><svg viewBox="0 0 42 42"><use xlink:href="#search"></use></svg></a>
 			</div>
-			{{!-- <a class="menu-btn" href="#">Escuchando Ahora</a> --}}
-			<a class="menu-btn" id="">Radio</a>
-			<a class="menu-btn" id="">Podcast</a>
-			<a class="menu-btn" id="">Artículos</a>
-			<a class="menu-btn" id="logout">Salir</a>
-		</nav>
-	</div>
-
-	<header class="white-bar">
-		<div class="toolbar">
-			<a class="head-btn menu"><svg viewBox="0 0 42 42"><use xlink:href="#menu"></use></svg></a>
-			<h2 class="titulo">INICIO</h2>
-			<a class="head-btn search"><svg viewBox="0 0 42 42"><use xlink:href="#search"></use></svg></a>
-		</div>
-	</header>
-	<section class="index first-section">
-		<a class="in-boton" href="radio.html">
-			<img src="images/menu1.png">
-			<div class="btn-txt">
-				<h3>RADIO</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
-			</div>
-			<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
-		</a>
-		<a class="in-boton" href="archive-podcast.html">
-			<img src="images/menu2.png">
-			<div class="btn-txt">
-				<h3>PODCAST</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
-			</div>
-			<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
-		</a>
-		{{# each data.pool}}
-			<a class="in-boton" href="column.html?id={{ID}}">
-				<img src="images/menu3.png">
+		</header>
+		<section class="index first-section">
+			<a class="in-boton" href="radio.html">
+				<img src="images/menu1.png">
 				<div class="btn-txt">
-					<h3>{{title}}</h3>
+					<h3>RADIO</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
 				</div>
+				<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
 			</a>
-		{{/ each }}
+			<a class="in-boton hook podcast" href="archive-podcast.html">
+				<img src="images/menu2.png">
+				<div class="btn-txt">
+					<h3>PODCAST</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
+				</div>
+				<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
+			</a>
+			{{# each data.pool}}
+				<a class="in-boton" href="column.html?id={{ID}}">
+					<img src="images/menu3.png">
+					<div class="btn-txt">
+						<h3>{{title}}</h3>
+					</div>
+				</a>
+			{{/ each }}
 
+		</section>
 	</section>
-	{{> nowplaying}}
+	<section class="insert_playing">	
+		{{> nowplaying}}
+	</section>

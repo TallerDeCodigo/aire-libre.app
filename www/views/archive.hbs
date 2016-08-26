@@ -1,0 +1,33 @@
+		{{> header}}
+		{{> sidemenu}}
+
+		<header class="white-bar">
+			<div class="toolbar">
+				<a class="head-btn menu"><svg viewBox="0 0 42 42"><use xlink:href="#menu"></use></svg></a>
+				<h2 class="titulo">{{header_title}}</h2>
+				<a class="head-btn search"><svg viewBox="0 0 42 42"><use xlink:href="#search"></use></svg></a>
+			</div>
+		</header>
+		<section class="posts first-section">
+		{{# each data.pool}}
+			{{# if columna}}
+				<article class="grid-item normal columna">
+					<a class="grid-link" href="#">
+						<div class="img-wrapper"><img src="{{thumb}}"></div>
+						<div class="art-title"><span>{{title}}</span></div>
+						<div class="art-descr">{{excerptc}}</div>
+					</a>
+				</article>
+			{{/ if }}
+
+			{{# if podcast}}
+				<article class="grid-item podcast">
+					<div class="pod-img">
+						<img src="{{thumb}}">
+						<span>{{title}}</span>
+					</div>
+					<div class="pod-title">{{excerpt}}</div>
+				</article>
+			{{/ if }}
+		{{/ each }}
+		</section>

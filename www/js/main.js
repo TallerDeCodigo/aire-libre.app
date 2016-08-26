@@ -67,7 +67,7 @@
 		registerCompiledPartials: function() {
 			console.log("Register pre compiled partials");
 			/* Add files to be loaded here */
-			var filenames = ['header', 'nowplaying', 'loader'];
+			var filenames = ['header', 'nowplaying', 'loader', 'sidemenu'];
 			
 			filenames.forEach(function (filename) {
 					Handlebars.registerPartial(filename, Handlebars.templates[filename]);
@@ -219,8 +219,8 @@
 		},
 		render_home : function(){
 			app.showLoader();
-			// if(!loggedIn)
-			// 		window.location.assign('login.html');
+			if(!loggedIn)
+					window.location.assign('login.html');
 
 			app.registerTemplate('home');
 
@@ -240,15 +240,14 @@
 				$('.container').html( html );
 				setTimeout(function(){	
 					app.hideLoader();
-					if(!loggedIn)
-						$('#account1').trigger('click');
+					initializeEvents();
 				}, 2000);
 			});
 			
 		},
-		render_feed : function(offset, filter){
+		render_archive : function(kind){
 			app.showLoader();
-			$.getJSON(api_base_url+'feed/'+offset+'/'+filter , function(response){
+			$.getJSON(api_base_url+'feed/'+kind+'/' , function(response){
 			})
 			 .fail(function(err){
 				console.log(JSON.stringify(err));
@@ -256,16 +255,25 @@
 				app.toast("Failed connecting to our servers, please check your Internet connection.")
 			})
 			 .done(function(response){
-				var data = app.gatherEnvironment(response);
+			 	console.log(response);
+			 	var title = ( kind == "podcast") ? "PODCAST" : null;
+			 		console.log(title);
+			 		title = (!title && kind == "recent") ? "LO ÚLTIMO" : title;
+			 		console.log(title);
+			 		title = (!title && kind == "columna") ? "ARTÍCULOS" : title;
+			 		console.log(title);
+			 		title = (!title ) ? "ARCHIVO" : title;
+			 		console.log(title);
+				var data = app.gatherEnvironment(response, title);
 					data.home_active = true;
-				var feed_tpl = Handlebars.templates['feed'];
-				console.log(data);
+
+				app.registerTemplate('archive');
+				var feed_tpl = Handlebars.templates['archive'];
 				var html 	 = feed_tpl(data);
-				$('.main').html( html );
+				$('.view').html( html );
 				setTimeout(function(){	
 					app.hideLoader();
-					if(!loggedIn)
-						$('#account1').trigger('click');
+					initializeEvents();
 				}, 2000);
 			});
 			
@@ -286,13 +294,14 @@
 			 });
 		},
 		render_column : function(column_id){
+			app.showLoader();
 			app.registerTemplate('column');
 			$.getJSON(api_base_url+'columns/'+column_id)
 			 .done(function(response){
 				var data = app.gatherEnvironment(response, "Leyendo");
 				console.log(data);
 				var template = Handlebars.templates['column'];
-				$('.container').html( template(data) );
+				$('.view').html( template(data) );
 				setTimeout(function(){
 					app.hideLoader();
 				}, 2000);
@@ -405,135 +414,3 @@
 		}
 	};
 
-/*      _                                       _                        _       
- *   __| | ___   ___ _   _ _ __ ___   ___ _ __ | |_   _ __ ___  __ _  __| |_   _ 
- *  / _` |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __| | '__/ _ \/ _` |/ _` | | | |
- * | (_| | (_) | (__| |_| | | | | | |  __/ | | | |_  | | |  __/ (_| | (_| | |_| |
- *  \__,_|\___/ \___|\__,_|_| |_| |_|\___|_| |_|\__| |_|  \___|\__,_|\__,_|\__, |
- *                                                                         |___/ 
- */
-	jQuery(document).ready(function($) {
-
-		// $('#search_by_photo').click(function(){
-		// 	app.get_file_from_device('search', 'camera');
-		// });
-
-		/* Create a new account the old fashioned way */
-		if($('#register_form').length)
-			$('#register_form').validate({
-				rules: {
-					user_login_reg: "required",
-					user_email_reg: {
-							required: true,
-							email: true
-						},
-					user_country: "required",
-					i_accept_terms : "required"
-				},
-				messages: {
-					user_login_reg: "Debes proporcionar un username",
-					user_email_reg: {
-							required: "Debes proporcionar un email",
-							email: "Por favor proporciona un email válido"
-						},
-					user_country: "Por favor selecciona tu país",
-					i_accept_terms: "Debes aceptar los términos y condiciones para continuar"
-				},
-				submitHandler: function(e){
-					var data_login  	= app.getFormData('#register_form');
-					data_login.user_password_reg = $('#user_password_reg').val();
-					var responsedata 	= apiRH.registerNative(data_login);
-					if(responsedata) {
-						apiRH.save_user_data_clientside(responsedata);
-						window.location.assign('feed.html?filter_feed=all');
-						return;
-					}
-					app.toast('Lo sentimos, el nombre de usuario ya existe.');
-					e.preventDefault();
-				}
-			});
-
-		/* Log In with a regular ol' account */
-		$('#login_form').submit(function(e){
-			app.showLoader();
-			e.preventDefault();
-			var data_login      = app.getFormData('#login_form');
-			var responsedata    = apiRH.loginNative(data_login);
-			if(responsedata) {
-				console.log(responsedata);
-				apiRH.save_user_data_clientside(responsedata);
-				window.location.assign('home.html');
-				return;
-			}
-			app.toast('Tu email o contraseña no son válidos.');
-		});
-
-		/** Login with events **/
-		$(document).on('click', '.login_button', function(){
-			
-			var provider = $(this).data('provider');
-			if(provider == 'facebook')
-				apiRH.loginOauth(provider, apiRH.loginCallbackFB);
-			if(provider == 'google')
-				apiRH.loginOauth(provider, apiRH.loginCallbackGP);
-		});
-
-		/* Log Out from the API */
-		$('#logout').on('click', function(e){
-			/* Requesting logout from server */
-			var response = apiRH.logOut({user_login : user, request_token : apiRH.get_request_token() });
-			if(response.success){
-				app.toast('Session ended, see you soon!');
-					app.ls.removeItem('airelibre_log_info');
-					app.ls.removeItem('request_token');
-					app.ls.removeItem('me.logged');
-					app.ls.removeItem('me');
-				window.location.assign('feed.html');
-				return;
-			}
-			app.toast('Ocurrió un problema al intentar cerrar tu sesión');
-			return;
-		});
-
-
-// ----------------------------------------------------------------------
-
-
-
-		//MARK NOTIFICATION AS READ
-		$('.main').on('tap', '.each_notification a', function(e){
-			e.preventDefault();
-			var redirect = $(this).attr('href');
-			var $context = $(this);
-			if($context.hasClass('read')) return false;
-			var context_id = $context.data('id');
-			
-			var response = apiRH.makeRequest(user+'/notifications/read/'+context_id);
-			if(response){
-				$context.addClass('read');
-			}
-			window.location.assign(redirect);
-			
-		});
-
-
-		/* Pagination Load more posts */
-		$(document).on('tap', '#load_more_posts', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			app.get_user_timeline(offset);
-			e.stopPropagation();
-		});
-
-		/* Pagination Load more search results */
-		$(document).on('tap', '#load_more_results', function(e){
-			e.preventDefault();
-			var offset = $(this).data('page');
-			var GET = app.getUrlVars();
-
-			app.get_search_results(GET.searchbox, offset);
-			e.stopPropagation();
-		});
-
-
-	});
