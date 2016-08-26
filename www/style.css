@@ -179,10 +179,10 @@ input[type="password"] {color:#5b5b5b;border:1px solid #9b9b9b;}
 input[type="submit"] {background:#202835;color:#FFF; text-transform: uppercase;}
 input[type="button"],
 .login_button {background:#33649e;color:#FFF; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 8px; text-decoration: none; padding: 1.25rem 2rem; margin: 1.5rem 0; display: block;}
-::-webkit-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
-:-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
-::-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
-:-ms-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
+  ::-webkit-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
+  :-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
+  ::-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
+  :-ms-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
 
 /* PODCAST */
 

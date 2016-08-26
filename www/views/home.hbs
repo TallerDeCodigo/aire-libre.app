@@ -5,15 +5,22 @@
 			<div class="header">
 				<a href="#">
 					<div class="profile-img">
-						<img src="images/menu1.png">
+						{{# me.profile_pic}}
+							<img src="{{.}}">
+						{{/ me.profile_pic}}
+
+						{{^ me.profile_pic}}
+							<img src="images/menu1.png">
+						{{/ me.profile_pic}}
 					</div>
-					<div class="profile-name">Hola {{}}</div>
+					<div class="profile-name">Hola {{me.first_name}} {{me.last_name}}</div>
 				</a>
 			</div>
 			{{!-- <a class="menu-btn" href="#">Escuchando Ahora</a> --}}
-			<a class="menu-btn" href="#">Radio</a>
-			<a class="menu-btn" href="#">Podcast</a>
-			<a class="menu-btn" href="#">Artículos</a>
+			<a class="menu-btn" id="">Radio</a>
+			<a class="menu-btn" id="">Podcast</a>
+			<a class="menu-btn" id="">Artículos</a>
+			<a class="menu-btn" id="logout">Salir</a>
 		</nav>
 	</div>
 

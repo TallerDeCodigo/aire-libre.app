@@ -106,7 +106,7 @@ function requestHandlerAPI(){
 		this.create_internal_user = function(email, attrs, token){
 											var data, response, exists = null, var_return;
 											/* If user exists, it returns the username and id */
-											exists  = this.getRequest('user/exists/', email);
+											exists  = this.getRequest('user/exists?email='+email, null);
 											console.log(JSON.stringify(exists));
 												/* Exit and get new valid token if user already exists */
 												if(exists.success){
@@ -129,9 +129,8 @@ function requestHandlerAPI(){
 													};
 											console.log(JSON.stringify(data));
 											response = this.makeRequest('auth/user/', data);
-											
 											/* End handshake with server by validating token and getting 'me' data */
-											//context.endHandshake(username);
+											context.endHandshake(email);
 
 											/* Validate token */
 											data = {
@@ -151,17 +150,19 @@ function requestHandlerAPI(){
 		 */
 		this.save_user_data_clientside = function(data){
 											var user_role = data.role;
-											if(user_role == 'administrator') user_role = 'maker';
-											this.ls.setItem('airelibre_log_info', 	JSON.stringify({
-																					user_login: 	data.user_login,
-																					username: 		data.user_login,
-																					user_id: 		data.user_id,
-																					user_role: 		data.role,
-																					user_profile: 	data.profile_url,
-																				}));
+											var myobject = {
+																user_login: 	data.user_login,
+																username: 		data.user_login,
+																user_id: 		data.user_id,
+																user_role: 		data.role,
+																user_profile: 	data.profile_url,
+															};
+															console.log(myobject);
+											this.ls.setItem('airelibre_log_info', 	JSON.stringify(myobject));
 											/* Also save user ME info */
 											$.getJSON(api_base_url+data.user_login+'/me/')
 											 .done(function(response){
+											 	console.log(response);
 											 	apiRH.ls.setItem('me', JSON.stringify(response));
 											 	apiRH.ls.setItem('me.logged', true);
 											})
@@ -375,7 +376,7 @@ function requestHandlerAPI(){
 										var username = response.lastname+"_"+response.id;
 										var found = apiRH.create_internal_user(username, email, {gpId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
 										/* End handshake with server by validating token and getting 'me' data */
-										context.endHandshake(username);
+										context.endHandshake(response.email);
 
 										window.location.assign('feed.html?filter_feed=all');
 										return;
@@ -397,9 +398,9 @@ function requestHandlerAPI(){
 										var email = response.email;
 										var found = apiRH.create_internal_user(email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
 										/* End handshake with server by validating token and getting 'me' data */
-										context.endHandshake(username);
+										// context.endHandshake(username);
 
-										window.location.assign('feed.html?filter_feed=all');
+										window.location.assign('home.html');
 										return;
 									})
 									 .fail(function(error){
@@ -421,8 +422,8 @@ function requestHandlerAPI(){
 									$(".insert_here").append(html);
 								};
 
-		this.endHandshake = function(user_login){
-								var exists  = context.getRequest('user/exists/'+ user_login, null);
+		this.endHandshake = function(email){
+								var exists  = context.getRequest('user/exists?email='+ email, null);
 								if(exists.success){
 									/* Validate token */
 									data = {
