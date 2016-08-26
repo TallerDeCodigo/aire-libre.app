@@ -11,8 +11,8 @@
 		<section class="posts first-section">
 		{{# each data.pool}}
 			{{# if columna}}
-				<article class="grid-item normal columna">
-					<a class="grid-link" href="#">
+				<articleclass="grid-item normal columna">
+					<a class="grid-link hook single-column"  data-id="{{ID}}" href="#">
 						<div class="img-wrapper"><img src="{{thumb}}"></div>
 						<div class="art-title"><span>{{title}}</span></div>
 						<div class="art-descr">{{excerptc}}</div>
@@ -21,7 +21,7 @@
 			{{/ if }}
 
 			{{# if podcast}}
-				<article class="grid-item podcast">
+				<article data-id="{{ID}}" class="grid-item podcast hook single-podcast">
 					<div class="pod-img">
 						<img src="{{thumb}}">
 						<span>{{title}}</span>

@@ -304,16 +304,17 @@
 				$('.view').html( template(data) );
 				setTimeout(function(){
 					app.hideLoader();
+					initializeEvents();
 				}, 2000);
 			})
 			 .fail(function(error){
 				console.log(error);
 			 });
 		},
-		render_post : function(post_id){
+		render_podcast : function(podcast_id){
 
 			/* Send header_title for it renders history_header */
-			$.getJSON(api_base_url+'content/'+post_id)
+			$.getJSON(api_base_url+'podcasts/'+podcast_id)
 			 .done(function(response){
 				var data = app.gatherEnvironment(response, "Now reading");
 

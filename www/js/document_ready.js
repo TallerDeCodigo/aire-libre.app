@@ -96,6 +96,12 @@ window.initializeEvents = function(){
 				if( $(this).hasClass("columna") )
 					return app.render_archive("columna");
 
+				// Single
+				if( $(this).hasClass("single-podcast") )
+					return app.render_podcast($(this).data('id'));
+				if( $(this).hasClass("single-column") )
+					return app.render_column($(this).data('id'));
+
 			});
 
 

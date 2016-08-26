@@ -10,7 +10,7 @@
 			</div>
 		</header>
 		<section class="index first-section">
-			<a class="in-boton" href="radio.html">
+			<a class="in-boton hook radio">
 				<img src="images/menu1.png">
 				<div class="btn-txt">
 					<h3>RADIO</h3>
@@ -18,7 +18,7 @@
 				</div>
 				<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
 			</a>
-			<a class="in-boton hook podcast" href="archive-podcast.html">
+			<a class="in-boton hook podcast">
 				<img src="images/menu2.png">
 				<div class="btn-txt">
 					<h3>PODCAST</h3>
@@ -27,7 +27,7 @@
 				<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
 			</a>
 			{{# each data.pool}}
-				<a class="in-boton" href="column.html?id={{ID}}">
+				<a class="in-boton hook single-column" data-id="{{ID}}" >
 					<img src="images/menu3.png">
 					<div class="btn-txt">
 						<h3>{{title}}</h3>
