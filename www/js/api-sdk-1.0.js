@@ -103,10 +103,10 @@ function requestHandlerAPI(){
 		 * @return userdata JSON Contains the user info to be stored client side
 		 * @see save_user_data_clientside()
 		 */
-		this.create_internal_user = function(username, email, attrs, token){
+		this.create_internal_user = function(email, attrs, token){
 											var data, response, exists = null, var_return;
 											/* If user exists, it returns the username and id */
-											exists  = this.getRequest('user/exists/', username);
+											exists  = this.getRequest('user/exists/', email);
 											console.log(JSON.stringify(exists));
 												/* Exit and get new valid token if user already exists */
 												if(exists.success){
@@ -125,13 +125,13 @@ function requestHandlerAPI(){
 											console.log('Creating new user');
 											data = {
 														email       : email,
-														username    : username,
 														attrs    	: attrs
 													};
 											console.log(JSON.stringify(data));
 											response = this.makeRequest('auth/user/', data);
+											
 											/* End handshake with server by validating token and getting 'me' data */
-											context.endHandshake(username);
+											//context.endHandshake(username);
 
 											/* Validate token */
 											data = {
@@ -395,8 +395,7 @@ function requestHandlerAPI(){
 									 .done(function(response){
 									 	console.log(response);
 										var email = response.email;
-										var username = response.lastname+"_"+response.id;
-										var found = apiRH.create_internal_user(username, email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
+										var found = apiRH.create_internal_user(email, {fbId: response.id, avatar: response.avatar, name: response.firstname, last_name: response.lastname}, window.localStorage.getItem('request_token'));
 										/* End handshake with server by validating token and getting 'me' data */
 										context.endHandshake(username);
 

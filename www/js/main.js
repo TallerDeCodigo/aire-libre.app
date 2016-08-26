@@ -453,6 +453,31 @@
 				}
 			});
 
+		/* Log In with a regular ol' account */
+		$('#login_form').submit(function(e){
+			app.showLoader();
+			e.preventDefault();
+			var data_login      = app.getFormData('#login_form');
+			var responsedata    = apiRH.loginNative(data_login);
+			if(responsedata) {
+				console.log(responsedata);
+				apiRH.save_user_data_clientside(responsedata);
+				window.location.assign('home.html');
+				return;
+			}
+			app.toast('Tu email o contraseña no son válidos.');
+		});
+
+		/** Login with events **/
+		$(document).on('click', '.login_button', function(){
+			
+			var provider = $(this).data('provider');
+			if(provider == 'facebook')
+				apiRH.loginOauth(provider, apiRH.loginCallbackFB);
+			if(provider == 'google')
+				apiRH.loginOauth(provider, apiRH.loginCallbackGP);
+		});
+
 		/* Log Out from the API */
 		$('#logout').on('click', function(e){
 			/* Requesting logout from server */

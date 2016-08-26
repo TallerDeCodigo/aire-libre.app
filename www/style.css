@@ -173,15 +173,16 @@ a.in-boton svg.blue {fill:#0245ff;}
 
 section.login {padding:15px;}
 .login img {width:36%;height:auto;margin:5px 0px 23px;}
-.login input {width:100%;margin:9px 0px;outline:none;background:none;border:none;border-radius:8px;height:42px;padding:10px;font-family:'Regular';text-transform:uppercase;letter-spacing:0.03em;}
+.login input {width:100%;margin:9px 0px;outline:none;background:none;border:none;border-radius:8px;height:42px;padding:10px;font-family:'Regular';letter-spacing:0.03em;}
 input[type="text"],
 input[type="password"] {color:#5b5b5b;border:1px solid #9b9b9b;}
-input[type="submit"] {background:#202835;color:#FFF;}
-input[type="button"] {background:#33649e;color:#FFF;}
-::-webkit-input-placeholder {color:#e3e3e3;}
-:-moz-placeholder {color:#e3e3e3;}
-::-moz-placeholder {color:#e3e3e3;}
-:-ms-input-placeholder {color:#e3e3e3;}
+input[type="submit"] {background:#202835;color:#FFF; text-transform: uppercase;}
+input[type="button"],
+.login_button {background:#33649e;color:#FFF; width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 8px; text-decoration: none; padding: 1.25rem 2rem; margin: 1.5rem 0; display: block;}
+::-webkit-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
+:-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
+::-moz-placeholder {color:#e3e3e3;text-transform:uppercase;}
+:-ms-input-placeholder {color:#e3e3e3;text-transform:uppercase;}
 
 /* PODCAST */
 

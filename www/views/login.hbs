@@ -7,12 +7,18 @@
 	</header>
 	<section class="login first-section">
 		<img src="images/login.svg">
-		<form>
+		<form id="login_form">
+			<input type="text" name="email" placeholder="CORREO ELECTRÓNICO">
+			<input type="password" name="password" placeholder="CONTRASEÑA">
+			{{!-- <input type="password" name="passwd_again" placeholder="CONFIRMA TU CONTRASEÑA"> --}}
+			<input type="submit" name="enviar" value="Iniciar sesión">
+		</form>
+		<a href="" class="login_button" data-provider="facebook">FACEBOOK LOGIN</a>
+		<form id="register_form" class="hidden">
 			<input type="text" name="email" placeholder="CORREO ELECTRÓNICO">
 			<input type="password" name="passwd" placeholder="CONTRASEÑA">
-			{{!-- <input type="password" name="passwd_again" placeholder="CONFIRMA TU CONTRASEÑA"> --}}
+			<input type="password" name="passwd_again" placeholder="CONFIRMA TU CONTRASEÑA">
 			<input type="submit" name="enviar" value="REGISTRARME">
-			<input type="button" name="facebook" value="FACEBOOK LOGIN">
 		</form>
 	</section>
 	{{> loader}}
