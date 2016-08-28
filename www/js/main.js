@@ -295,7 +295,16 @@
 				var data = app.gatherEnvironment(response, "Leyendo");
 				console.log(data);
 				var template = Handlebars.templates['column'];
-				$('.view').html( template(data) );
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( template(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "-20px")
+													 .animate({
+														'margin-left': "+=20",
+														opacity: 1
+													}, 240);
+				});
 				setTimeout(function(){
 					app.hideLoader();
 					initializeEvents();
@@ -306,16 +315,27 @@
 			 });
 		},
 		render_podcast : function(podcast_id){
-
+			app.showLoader();
+			app.registerTemplate('podcast');
 			/* Send header_title for it renders history_header */
 			$.getJSON(api_base_url+'podcasts/'+podcast_id)
 			 .done(function(response){
-				var data = app.gatherEnvironment(response, "Now reading");
+				var data = app.gatherEnvironment(response, "Podcasts");
+				console.log(data);
+				var template = Handlebars.templates['podcast'];
+				$('.view').fadeOut('fast', function(){
 
-				var template = Handlebars.templates['post'];
-				$('.main').html( template(data) );
+					$('.view').html( template(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "-20px")
+													 .animate({
+														'margin-left': "+=20",
+														opacity: 1
+													}, 240);
+				});
 				setTimeout(function(){
 					app.hideLoader();
+					initializeEvents();
 				}, 2000);
 			})
 			 .fail(function(error){

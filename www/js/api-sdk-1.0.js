@@ -22,7 +22,7 @@ function requestHandlerAPI(){
 	var context = this;
 	window.sdk_app_context = null;
 	/* Production API URL */
-	window.api_base_url = "https://airelibre.devtdc.online/rest/v1/";
+	// window.api_base_url = "https://airelibre.devtdc.online/rest/v1/";
 	/* Development local API URL */
 	window.api_base_url = "http://airelibre.dev/rest/v1/";
 	// window.api_base_url = "http://localhost/~manuelon/dedalo/rest/v1/";
