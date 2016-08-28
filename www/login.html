@@ -17,8 +17,8 @@
 	<!-- Load Scripts -->
     <script src="js/bower_components/handlebars/handlebars.min.js"></script>
     <script src="js/bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="js/plugins.js"></script>
 	<script src="views/compiled/partials.js"></script>
+	<script type="text/javascript" src="js/plugins.js"></script>
 	<!-- <script src="views/compiled/login.js"></script> -->
 	<script src="js/api-sdk-1.0.js"></script>
 	<script type="text/javascript" src="cordova.js"></script>
@@ -26,12 +26,12 @@
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
 		/* Initialize app object and perform initial login check */
-		window.is_home = true;
+		window.is_login = true;
 		app.initialize();
 		app.render_login();
 		app.showLoader();
 	</script>
 
-	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/document_ready.js"></script>
 </html>
 

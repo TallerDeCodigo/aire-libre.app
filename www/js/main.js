@@ -33,10 +33,7 @@
 							window.user_role 	= (log_info) ? log_info.user_role 	: '';
 			if(log_info)
 				loggedIn = true;
-			/*** Initialize maps tools ***/
-			this.marker1 = [];
-			this.marker2 = [];
-			this.marker3 = [];
+
 			/* Check if has any token */
 			if(apiRH.has_token()){
 				/* Check if has a valid token */
@@ -46,7 +43,7 @@
 					console.log('You okay, now you can start making calls');
 					/* Take the user to it's timeline */
 					var is_home = window.is_home;
-					if(is_home)
+					if(window.is_login)
 						window.location.assign('home.html');
 					return;
 				}else{
@@ -56,11 +53,6 @@
 				}
 			}
 
-			/* Copiado de ondeviceready ----- QUITAR ----- */
-			// var backButtonElement = document.getElementById("backBtn");
-			// if(backButtonElement)
-			// 	backButtonElement.addEventListener("click", app.onBackButton, false);
-			
 			/* Requesting passive token if no token is previously stored */
 			console.log("Token::: "+apiRH.request_token().get_request_token());
 		},
@@ -212,6 +204,7 @@
 				var template = Handlebars.templates["login"];
 				$('.container').html( template(data) );
 				app.hideLoader();
+				initializeEvents();
 			}, 2000);
 			// if(!loggedIn)
 			// 		window.location.assign('login.html');
@@ -235,10 +228,11 @@
 				var data = app.gatherEnvironment(response, "Inicio");
 					data.home_active = true;
 				var home_tpl = Handlebars.templates['home'];
-				console.log(data);
+
 				var html 	 = home_tpl(data);
 				$('.container').html( html );
 				setTimeout(function(){	
+					audioLibrary.registerRadio(response.radio);
 					app.hideLoader();
 					initializeEvents();
 				}, 2000);

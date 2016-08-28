@@ -61,8 +61,8 @@ window.initializeEvents = function(){
 
 			/** Login with events **/
 			$(document).on('click', '.login_button', function(){
-				
 				var provider = $(this).data('provider');
+				console.log(provider);
 				if(provider == 'facebook')
 					apiRH.loginOauth(provider, apiRH.loginCallbackFB);
 				if(provider == 'google')
@@ -95,6 +95,8 @@ window.initializeEvents = function(){
 					return app.render_archive("podcast");
 				if( $(this).hasClass("columna") )
 					return app.render_archive("columna");
+				if( $(this).hasClass("home") )
+					return app.render_home();
 
 				// Single
 				if( $(this).hasClass("single-podcast") )
@@ -228,6 +230,13 @@ window.initializeEvents = function(){
 				setTimeout(function() {$(".overscreen").hide();}, 600);
 			});
 
+		document.addEventListener("song-played", function(e) {
+			console.log(e.detail);
+		});
+		
+		document.addEventListener("radio-started", function(e) {
+			console.log(e.detail);
+		});
 
 	});
 
