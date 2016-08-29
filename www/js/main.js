@@ -91,6 +91,9 @@
 					return opts.inverse(this);
 				}
 			});
+			Handlebars.registerHelper("inc", function(value, options) {
+			    return parseInt(value) + 1;
+			});
 			return;
 		},
 		bindEvents: function() {
@@ -241,6 +244,7 @@
 		},
 		render_archive : function(kind){
 			app.showLoader();
+			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'feed/'+kind+'/' , function(response){
 			})
 			 .fail(function(err){
@@ -261,7 +265,6 @@
 				var data = app.gatherEnvironment(response, title);
 					data.home_active = true;
 
-				app.registerTemplate('archive');
 				var feed_tpl = Handlebars.templates['archive'];
 				var html 	 = feed_tpl(data);
 				$('.view').html( html );
@@ -273,15 +276,28 @@
 			
 		},
 		render_search_results : function(search_term){
+			app.showLoader();
+			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'content/search/'+search_term)
 			 .done(function(response){
-				console.log(response);
-				var data 	 = app.gatherEnvironment(response);
+				var data 	 = app.gatherEnvironment(response, '\"'+search_term+'\"');
 					data.search_active = true;
 					data.search_term = search_term;
-					console.log(data);
-				var template = Handlebars.templates['search_results'];
-				$('.main').html( template(data) );
+				var template = Handlebars.templates['archive'];
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( template(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "-=20",
+														opacity: 1
+													}, 240);
+				});
+				setTimeout(function(){
+					app.hideLoader();
+					initializeEvents();
+				}, 2000);
 			})
 			 .fail(function(error){
 				console.log(error);
@@ -299,9 +315,9 @@
 
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
-													 .css("margin-left", "-20px")
+													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "+=20",
+														'margin-left': "-=20",
 														opacity: 1
 													}, 240);
 				});
@@ -327,9 +343,9 @@
 
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
-													 .css("margin-left", "-20px")
+													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "+=20",
+														'margin-left': "-=20",
 														opacity: 1
 													}, 240);
 				});

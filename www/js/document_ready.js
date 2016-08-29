@@ -97,6 +97,7 @@ window.initializeEvents = function(){
 					return app.render_archive("columna");
 				if( $(this).hasClass("home") )
 					return app.render_home();
+				
 
 				// Single
 				if( $(this).hasClass("single-column") )
@@ -104,46 +105,46 @@ window.initializeEvents = function(){
 
 			});
 
-
-	// ----------------------------------------------------------------------
-
-
-
-			//MARK NOTIFICATION AS READ
-			$('.main').on('tap', '.each_notification a', function(e){
-				e.preventDefault();
-				var redirect = $(this).attr('href');
-				var $context = $(this);
-				if($context.hasClass('read')) return false;
-				var context_id = $context.data('id');
-				
-				var response = apiRH.makeRequest(user+'/notifications/read/'+context_id);
-				if(response){
-					$context.addClass('read');
+			$('#trigger_search').click(function(){
+				console.log("Hello?");
+				if(!$(this).hasClass("open")){
+					$(this).addClass("open");
+					$("#search_form input").animate({
+														width: "74vw"
+													})
+											.addClass('open');
+					return;
 				}
-				window.location.assign(redirect);
-				
+				$(this).removeClass("open");
+				$("#search_form input").animate({
+													width: "0",
+													padding: "0"
+												})
+										.removeClass('open');
+				return;
 			});
 
+			// $(document).on('click', function(e){
+			// 	console.log($(e.target));
+			// 	if( ($(e.target).hasClass('search_form') || $(e.target).parent('search_form'))
+			// 		&& $('#trigger_search').hasClass('open') ){
+			// 		console.log("close it");
+			// 		$('#trigger_search').removeClass('open')
+			// 		$("#search_form input").animate({
+			// 										width: "0",
+			// 										padding: "0"
+			// 									})
+			// 							.removeClass('open');
+			// 		e.stopPropagation();
+			// 	}
+			// });
 
-			/* Pagination Load more posts */
-			$(document).on('tap', '#load_more_posts', function(e){
+			$('#search_form').on("submit", function(e){
 				e.preventDefault();
-				var offset = $(this).data('page');
-				app.get_user_timeline(offset);
 				e.stopPropagation();
+				var data = app.getFormData($(this));
+				return app.render_search_results(data.search);
 			});
-
-			/* Pagination Load more search results */
-			$(document).on('tap', '#load_more_results', function(e){
-				e.preventDefault();
-				var offset = $(this).data('page');
-				var GET = app.getUrlVars();
-
-				app.get_search_results(GET.searchbox, offset);
-				e.stopPropagation();
-			});
-
 
 
 			$(window).on("load resize",function(){

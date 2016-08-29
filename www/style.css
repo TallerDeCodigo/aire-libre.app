@@ -63,6 +63,43 @@ figure {margin: 0;}
 @font-face {font-family:'Regular';src:url('fonts/Regular-BoldItalic.otf');font-weight:900;font-style:italic;}
 @font-face {font-family:'Regular';src:url('fonts/Regular-Semibold.otf');font-weight:600;font-style:normal;}
 @font-face {font-family:'Regular';src:url('fonts/Regular-SemiboldItalic.otf');font-weight:600;font-style:italic;}
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url('MaterialIcons-Regular.woff2') format('woff2'),
+       url('MaterialIcons-Regular.woff') format('woff'),
+       url('MaterialIcons-Regular.ttf') format('truetype');
+}
+
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
 
 /*** SIZING WITH REM ***/
 html { font-size: 62.5%; } 
@@ -89,9 +126,14 @@ header:not(.no-shade){box-shadow:0px 0px 2px #9e9e9e;}
 
 a.head-btn {position:absolute;top:8px;width:28px;height:28px;color:inherit;text-decoration:none;}
 a.head-btn svg {width:100%;height:auto;fill:currentColor;}
+.head-btn.search{}
+
 a.menu {left:13px;}
 a.search {right:13px;}
-
+  .search_form{position: absolute; top: 1rem; right: 5rem; z-index: 999;}
+  .search_form input{width: 0; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; border: none!important; padding:0;}
+  .search_form input.open{border: 1px solid #eef1f6!important; padding: 0.5rem 1rem !important;}
+  .search_form input:focus{outline: none;}
 .white-bar {background:#FFF;color:#000;}
 .gray-bar {background:#464a52;color:#FFF;}
 .toolbar {width:100%;height:45px;position:absolute;top:0px;left:0px;}
@@ -131,7 +173,7 @@ div.profile-name {font-weight:bold;}
 
 /* POSTS */
 
-section.posts {background:#cecece;padding:15px 0px 56px;}
+section.posts {background:#cecece;padding:15px 0px 56px; min-height: 100vh;}
 section.posts a {color:inherit;text-decoration:none;}
 .grid-item {margin:0px 13px 15px 13px;overflow:hidden;text-align:left;padding-bottom:6px;}
 article.normal {background:#FFF;}
@@ -193,9 +235,11 @@ section.podcast {background:#d8d8d8;text-align:left;}
 .autor {margin:0px 0px 13px;}
 a.botonero {display:inline-block;border-radius:4px;border:1px solid #FFF;width:100px;padding:4px;color:#FFF;text-decoration:none;margin:2px 5px 2px 0px;text-align:center;background:none;}
 a.botonero.activo {color:#d0d4db;background:#FFF;border:1px solid #FFF;}
-.podcast ul {color:#5c5c5c;width:100%;margin:0px;padding:0px 14px;padding-bottom:57px;}
+.podcast ul {color:#5c5c5c;width:100%;margin:0px;padding:0px 14px;padding-bottom:57px; min-height: 51vh;}
 .podcast ul li {border-bottom:1px solid #FFF;list-style:none;margin:0px;-webkit-margin-before:0px;-webkit-margin-after:0px;-webkit-margin-start:0px;-webkit-margin-end:0px;-webkit-padding-start:0px;padding:16px 6px 32px;}
 li .episodio {float:left;}
+li .episodio .material-icons{display: inline-block; display: none; vertical-align: bottom; font-size: 1.5rem;}
+li .episodio.activo .material-icons{display: inline-block;}
 .episodio span {margin-right:10px;}
 li .tiempo {float:right;}
 
