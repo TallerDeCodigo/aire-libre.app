@@ -10,6 +10,7 @@
 		app_context: this,
 			// Application Constructor
 		initialize: function() {
+			window.firstTime = true;
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
@@ -215,8 +216,17 @@
 		},
 		render_home : function(){
 			app.showLoader();
+
 			if(!loggedIn)
 					window.location.assign('login.html');
+
+			if(window.firstTime){
+				app.registerTemplate('container');
+				window.firstTime = false;
+				var container_template = Handlebars.templates['container'];
+				var html 	 = container_template();
+				$('.container').html( html );
+			}
 
 			app.registerTemplate('home');
 
@@ -232,8 +242,16 @@
 					data.home_active = true;
 				var home_tpl = Handlebars.templates['home'];
 
-				var html 	 = home_tpl(data);
-				$('.container').html( html );
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( home_tpl(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "-=20",
+														opacity: 1
+													}, 240);
+				});
 				setTimeout(function(){	
 					audioLibrary.registerRadio(response.radio);
 					app.hideLoader();
@@ -255,19 +273,24 @@
 			 .done(function(response){
 			 	console.log(response);
 			 	var title = ( kind == "podcast") ? "PODCAST" : null;
-			 		console.log(title);
 			 		title = (!title && kind == "recent") ? "LO ÚLTIMO" : title;
-			 		console.log(title);
 			 		title = (!title && kind == "columna") ? "ARTÍCULOS" : title;
-			 		console.log(title);
 			 		title = (!title ) ? "ARCHIVO" : title;
-			 		console.log(title);
+
 				var data = app.gatherEnvironment(response, title);
 					data.home_active = true;
 
 				var feed_tpl = Handlebars.templates['archive'];
-				var html 	 = feed_tpl(data);
-				$('.view').html( html );
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( feed_tpl(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "-=20",
+														opacity: 1
+													}, 240);
+				});
 				setTimeout(function(){	
 					app.hideLoader();
 					initializeEvents();
@@ -288,7 +311,7 @@
 
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
-													 .css("margin-left", "20px")
+													 .css("margin-left", "40px")
 													 .animate({
 														'margin-left': "-=20",
 														opacity: 1

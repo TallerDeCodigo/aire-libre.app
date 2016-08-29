@@ -106,13 +106,13 @@ window.initializeEvents = function(){
 			});
 
 			$('#trigger_search').click(function(){
-				console.log("Hello?");
 				if(!$(this).hasClass("open")){
 					$(this).addClass("open");
 					$("#search_form input").animate({
 														width: "74vw"
 													})
-											.addClass('open');
+											.addClass('open')
+											.focus();
 					return;
 				}
 				$(this).removeClass("open");
