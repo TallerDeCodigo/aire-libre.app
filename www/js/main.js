@@ -232,7 +232,7 @@
 
 			app.registerTemplate('home');
 
-			$.getJSON(api_base_url+'feed' , function(response){
+			$.getJSON(api_base_url+'feed/home/' , function(response){
 			})
 			 .fail(function(err){
 				console.log(JSON.stringify(err));
