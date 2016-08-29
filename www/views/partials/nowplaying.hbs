@@ -1,10 +1,16 @@
 <div class="after-footer"></div>
-<footer class="alaire">
+<footer id="player" class="alaire">
 	<svg viewBox="0 0 50 50" class="album"><use xlink:href="#album"></use></svg>
 	<div class="audio-title">
-		<div class="showname">LA COMIDA [14:00–16:00]</div>
-		<div class="breadcrumbs">Hunting » Fishlights » Serpientes EP</div>
+		<div class="showname">{{title}} {{duration}}</div>
+		{{!-- <div class="breadcrumbs">Hunting » Fishlights » Serpientes EP</div> --}}
 	</div>
 	<svg viewBox="0 0 116 50" class="aire"><use xlink:href="#aire"></use></svg>
-	<svg viewBox="0 0 50 50" class="play"><use xlink:href="#play"></use></svg>
+	{{# playing}}
+		<i class="material-icons">pause</i>
+	{{/ playing}}
+
+	{{^ playing}}
+		<i class="material-icons">play_arrow</i>
+	{{/ playing}}
 </footer>

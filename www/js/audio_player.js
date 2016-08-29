@@ -26,6 +26,10 @@ audioLibrary.play = function() {
 audioLibrary.playSong = function(buffer) {
 	var event = new CustomEvent("song-played", { "detail": "Song playback has started" });
 	document.dispatchEvent(event);
+	var source = context.createBufferSource();
+	source.buffer = buffer;
+	source.connect(context.destination);
+	source.start(0);
 }
 audioLibrary.pauseSong = function(buffer) {
 	var event = new CustomEvent("song-paused", { "detail": "Song playback has been paused" });
@@ -48,6 +52,8 @@ audioLibrary.playRadio = function() {
 
 audioLibrary.registerRadio = function(url) {
 	this.radioFile = (this.radioFile) ? url : url;
+	console.log(url);
+	console.log(this.radioFile);
 }
 
 audioLibrary.playNextSong = function(buffer) {
@@ -66,8 +72,7 @@ audioLibrary.loadNewAudio =  function(url) {
   	request.onload = function() {
 		context.decodeAudioData(request.response, function(buffer) {
 		  audioBuffer = buffer;
-		  audioLibrary.playSound(audioBuffer);
-		  console.log(buffer);
+		  audioLibrary.playSong(audioBuffer);
 		}, function(err){
 			console.log(err);
 		});

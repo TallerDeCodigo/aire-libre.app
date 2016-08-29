@@ -220,9 +220,10 @@
 			if(!loggedIn)
 					window.location.assign('login.html');
 
+			/*** First time loading home ***/
 			if(window.firstTime){
+				
 				app.registerTemplate('container');
-				window.firstTime = false;
 				var container_template = Handlebars.templates['container'];
 				var html 	 = container_template();
 				$('.container').html( html );
@@ -238,6 +239,7 @@
 				app.toast("Failed connecting to our servers, please check your Internet connection.")
 			})
 			 .done(function(response){
+				audioLibrary.registerRadio(response.radio);
 				var data = app.gatherEnvironment(response, "Inicio");
 					data.home_active = true;
 				var home_tpl = Handlebars.templates['home'];
@@ -252,8 +254,12 @@
 														opacity: 1
 													}, 240);
 				});
-				setTimeout(function(){	
-					audioLibrary.registerRadio(response.radio);
+				setTimeout(function(){
+					if(window.firstTime){
+						audioLibrary.playRadio();
+						window.firstTime = false;
+					}
+					
 					app.hideLoader();
 					initializeEvents();
 				}, 2000);
