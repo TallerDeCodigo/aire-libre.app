@@ -11,6 +11,7 @@
 			// Application Constructor
 		initialize: function() {
 			window.firstTime = true;
+			window.playing 	 = false;
 			this.bindEvents();
 			/* Initialize API request handler */
 			window.apiRH = new requestHandlerAPI().construct(app);
@@ -242,6 +243,8 @@
 				audioLibrary.registerRadio(response.radio);
 				var data = app.gatherEnvironment(response, "Inicio");
 					data.home_active = true;
+					data.playing = true;
+					console.log(data);
 				var home_tpl = Handlebars.templates['home'];
 
 				$('.view').fadeOut('fast', function(){
@@ -258,6 +261,7 @@
 					if(window.firstTime){
 						audioLibrary.playRadio();
 						window.firstTime = false;
+						window.playing 	 = true;
 					}
 					
 					app.hideLoader();

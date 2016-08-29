@@ -2,15 +2,12 @@
 <footer id="player" class="alaire">
 	<svg viewBox="0 0 50 50" class="album"><use xlink:href="#album"></use></svg>
 	<div class="audio-title">
-		<div class="showname">{{title}} {{duration}}</div>
+		<div class="showname">{{radio.title}} {{radio.duration}}</div>
 		{{!-- <div class="breadcrumbs">Hunting » Fishlights » Serpientes EP</div> --}}
 	</div>
 	<svg viewBox="0 0 116 50" class="aire"><use xlink:href="#aire"></use></svg>
-	{{# playing}}
+	{{# if playing}}
 		<i class="material-icons">pause</i>
-	{{/ playing}}
-
-	{{^ playing}}
-		<i class="material-icons">play_arrow</i>
-	{{/ playing}}
+	{{/ if}}
+	
 </footer>
