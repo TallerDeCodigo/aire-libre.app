@@ -92,7 +92,7 @@ window.initializeEvents = function(){
 				if( $(this).hasClass("recent") )
 					return app.render_archive("recent");
 				if( $(this).hasClass("podcast") )
-					return app.render_podcast($(this).data('id'));
+					return app.render_archive("podcast");
 				if( $(this).hasClass("columna") )
 					return app.render_archive("columna");
 				if( $(this).hasClass("home") )
@@ -102,7 +102,8 @@ window.initializeEvents = function(){
 				// Single
 				if( $(this).hasClass("single-column") )
 					return app.render_column($(this).data('id'));
-
+				if( $(this).hasClass("single-podcast") )
+					return app.render_podcast($(this).data('id'));
 			});
 
 			$('#trigger_search').click(function(){

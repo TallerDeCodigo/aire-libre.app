@@ -248,7 +248,7 @@
 													 .css("display", "block")
 													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "-=20",
+														'margin-left': "0",
 														opacity: 1
 													}, 240);
 				});
@@ -287,7 +287,7 @@
 													 .css("display", "block")
 													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "-=20",
+														'margin-left': "0",
 														opacity: 1
 													}, 240);
 				});
@@ -313,7 +313,7 @@
 													 .css("display", "block")
 													 .css("margin-left", "40px")
 													 .animate({
-														'margin-left': "-=20",
+														'margin-left': "0",
 														opacity: 1
 													}, 240);
 				});
@@ -340,7 +340,7 @@
 													 .css("display", "block")
 													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "-=20",
+														'margin-left': "0",
 														opacity: 1
 													}, 240);
 				});
@@ -368,7 +368,7 @@
 													 .css("display", "block")
 													 .css("margin-left", "20px")
 													 .animate({
-														'margin-left': "-=20",
+														'margin-left': "0",
 														opacity: 1
 													}, 240);
 				});

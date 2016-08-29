@@ -196,7 +196,8 @@ article div.pod-img span {top:34.5%;}
 .more-posts {height:58px;background:#000;color:#FFF;line-height:58px;width:100%;position:absolute;bottom:0px;font-size:120%;left:0px;}
 
 .head_image{width: 100%; height: auto; display: block;}
-.column_page h1{position: absolute; top: 2rem; left: 2rem; color: #FFF; letter-spacing: 1px; text-transform: uppercase;}
+.column_page{padding-top: 4rem;}
+.column_page h1{position: absolute; top: 17rem; left: 2rem; color: #FFF; letter-spacing: 1px; text-transform: uppercase; text-shadow: 1px 1px 2px rgba(150, 150, 150, 0.25);}
 .column_page .content {padding: 4rem 2.5rem; width: 100%; text-align: left; line-height: 2.6rem; letter-spacing: 0.6px; color: #656464;}
 
 /* INDEX */
