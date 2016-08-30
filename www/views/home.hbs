@@ -11,30 +11,36 @@
 				</div>
 				<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
 			</a> --}}
-			
-			{{# each data.pool}}
 
-				{{# podcast}}
-					<a class="in-boton hook single-podcast" data-id="{{ID}}">
-						{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
-						<div class="btn-txt">
-							<h3>{{programa}} - {{title}}</h3>
-							<p>{{{excerpt}}}</p>
-						</div>
-						<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
-					</a>
-				{{/ podcast}}
+			<a class="in-boton hook radio" data-id="{{ID}}">
+				<img src="images/menu1.png">
+				<div class="btn-txt">
+					<h3>RADIO</h3>
+					<p>{{{excerpt}}}</p>
+				</div>
+				<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
+			</a>
+			<a class="in-boton hook podcasts" data-id="{{ID}}">
+				<img src="images/menu2.png">
+				<div class="btn-txt">
+					<h3>PODCASTS</h3>
+					<p>{{{excerpt}}}</p>
+				</div>
+				<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
+			</a>	
 
-				{{# columna}}
-					<a class="in-boton hook single-column" data-id="{{ID}}" >
-						{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
-						<div class="btn-txt">
-							<h3>{{title}}</h3>
-							<p>{{{excerpt}}}</p>
-						</div>
-					</a>
-				{{/ columna}}
-			{{/ each }}
+			<a class="in-boton hook recent" >
+				{{# data.pool}}
+					{{# if thumb_url}}
+						<img src="{{thumb_url}}">
+					{{else}}
+						<img src="images/menu2.png">
+					{{/ if}}
+				{{/ data.pool}}
+				<div class="btn-txt">
+					<h3>LO ÚLTIMO</h3>
+				</div>
+			</a>
 
 		</section>
 	</section>

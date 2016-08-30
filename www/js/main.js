@@ -308,6 +308,72 @@
 			});
 			
 		},
+		render_authors : function(){
+			app.showLoader();
+			app.registerTemplate('authors');
+			$.getJSON(api_base_url+'alphabet/terms/autor/' , function(response){
+			})
+			 .fail(function(err){
+				console.log(JSON.stringify(err));
+				app.hideLoader();
+				app.toast("Failed connecting to our servers, please check your Internet connection.")
+			})
+			 .done(function(response){
+			 	
+				var data = app.gatherEnvironment(response, "Autores");
+					data.home_active = true;
+				console.log(data);
+				var feed_tpl = Handlebars.templates['authors'];
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( feed_tpl(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "0",
+														opacity: 1
+													}, 240);
+				});
+				setTimeout(function(){	
+					app.hideLoader();
+					initializeEvents();
+				}, 2000);
+			});
+			
+		},
+		render_author_archive : function(){
+			app.showLoader();
+			app.registerTemplate('authors');
+			$.getJSON(api_base_url+'alphabet/terms/autor/' , function(response){
+			})
+			 .fail(function(err){
+				console.log(JSON.stringify(err));
+				app.hideLoader();
+				app.toast("Failed connecting to our servers, please check your Internet connection.")
+			})
+			 .done(function(response){
+			 	
+				var data = app.gatherEnvironment(response, "Autores");
+					data.home_active = true;
+				console.log(data);
+				var feed_tpl = Handlebars.templates['authors'];
+				$('.view').fadeOut('fast', function(){
+
+					$('.view').html( feed_tpl(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "0",
+														opacity: 1
+													}, 240);
+				});
+				setTimeout(function(){	
+					app.hideLoader();
+					initializeEvents();
+				}, 2000);
+			});
+			
+		},
 		render_search_results : function(search_term){
 			app.showLoader();
 			app.registerTemplate('archive');

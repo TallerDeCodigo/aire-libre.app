@@ -1,0 +1,14 @@
+	{{> header}}
+	{{> sidemenu}}
+	<section class="autores first-section">
+
+		<div class="letra">
+			{{# each data}}
+			<span>{{@key}}</span>
+				{{# each this}}
+					<a class="hook author" data-id="{{id}}">{{name}}</a>
+				{{/ each }}
+			{{/ each }}
+		</div>
+
+	</section>

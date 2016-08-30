@@ -97,6 +97,10 @@ window.initializeEvents = function(){
 					return app.render_archive("columna");
 				if( $(this).hasClass("home") )
 					return app.render_home();
+				if( $(this).hasClass("authors") )
+					return app.render_authors();
+				if( $(this).hasClass("author") )
+					return app.render_author_archive($(this).data("id"));
 				
 
 				// Single

@@ -4,10 +4,14 @@
 	<div class="audio-title">
 		<div class="showname">{{radio.title}} {{radio.duration}}</div>
 		{{!-- <div class="breadcrumbs">Hunting » Fishlights » Serpientes EP</div> --}}
+		{{# song}}
+			<div class="breadcrumbs">{{title}} » {{artist}} » {{album}}</div>
+		{{/ song}}
 	</div>
-	<svg viewBox="0 0 116 50" class="aire"><use xlink:href="#aire"></use></svg>
 	{{# if playing}}
 		<i class="material-icons">pause</i>
+	{{else}}
+		<i class="material-icons">play</i>
 	{{/ if}}
 	
 </footer>
