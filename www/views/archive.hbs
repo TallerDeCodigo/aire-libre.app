@@ -6,7 +6,9 @@
 			{{# if columna}}
 				<articleclass="grid-item normal columna">
 					<a class="grid-link hook single-column"  data-id="{{ID}}" href="#">
-						<div class="img-wrapper"><img src="{{thumb}}"></div>
+						{{# thumb_url}}
+							<div class="img-wrapper"><img src="{{thumb_url}}"></div>
+						{{/ thumb_url}}
 						<div class="art-title"><span>{{title}}</span></div>
 						<div class="art-descr">{{excerptc}}</div>
 					</a>

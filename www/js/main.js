@@ -271,6 +271,7 @@
 			
 		},
 		render_archive : function(kind){
+			console.log("ARchive");
 			app.showLoader();
 			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'feed/'+kind+'/' , function(response){

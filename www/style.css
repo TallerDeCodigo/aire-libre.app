@@ -178,6 +178,7 @@ div.profile-name {font-weight:bold;}
 section.posts {background:#cecece;padding:15px 0px 56px; min-height: 100vh;}
 section.posts a {color:inherit;text-decoration:none;}
 .grid-item {margin:0px 13px 15px 13px;overflow:hidden;text-align:left;padding-bottom:6px;}
+.grid-item.columna{}
 article.normal {background:#FFF;}
 article.podcast {background:#7e7e7e;}
 .grid-item img {width:100%;height:auto;}
