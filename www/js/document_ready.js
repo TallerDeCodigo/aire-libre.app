@@ -100,7 +100,7 @@ window.initializeEvents = function(){
 				if( $(this).hasClass("authors") )
 					return app.render_authors();
 				if( $(this).hasClass("author") )
-					return app.render_author_archive($(this).data("id"));
+					return app.render_taxonomy( $(this).data("id"), 'autor', '.view', 'archive' );
 				
 
 				// Single
@@ -236,9 +236,13 @@ window.initializeEvents = function(){
 
 		document.addEventListener("song-played", function(e) {
 			console.log(e.detail);
+			$('#insert_title').text("lol");
+			$('#insert_artist').text("The Artist");
+			$('#insert_album').text("Some Album");
 		});
 		
 		document.addEventListener("radio-started", function(e) {
+			// $('#insert_title').text("lol");
 			console.log(e.detail);
 		});
 

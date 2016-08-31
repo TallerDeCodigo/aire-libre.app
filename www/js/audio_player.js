@@ -5,7 +5,9 @@ window.audioLibrary = {
 
 audioLibrary.audioBuffer 	= null;
 audioLibrary.playlist 		= [];
+audioLibrary.radioPlaylist 	= [];
 audioLibrary.radioFile 		= null;
+audioLibrary.playlistPointer= null;
 
 
 // Fix up prefixing
@@ -30,7 +32,9 @@ audioLibrary.playSong = function(buffer) {
 	source.buffer = buffer;
 	source.connect(context.destination);
 	source.start(0);
+	app.hidePlayerLoader();
 }
+
 audioLibrary.pauseSong = function(buffer) {
 	var event = new CustomEvent("song-paused", { "detail": "Song playback has been paused" });
 	document.dispatchEvent(event);
@@ -44,8 +48,9 @@ audioLibrary.initPlaylist = function(buffer) {
 }
 
 audioLibrary.playRadio = function() {
-	audioLibrary.loadNewAudio(this.radioFile);
-	
+	audioLibrary.loadNewAudio(this.radioFile.stream);
+	audioLibrary.radioPlaylist = this.radioFile.meta;
+	console.log(audioLibrary.radioPlaylist);
 	var event = new CustomEvent("radio-started", { "detail": "Radio playback has started" });
 	document.dispatchEvent(event);
 }
@@ -64,6 +69,7 @@ audioLibrary.playNextSong = function(buffer) {
 }
 
 audioLibrary.loadNewAudio =  function(url) {
+	app.hidePlayerLoader();
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.responseType = 'arraybuffer';

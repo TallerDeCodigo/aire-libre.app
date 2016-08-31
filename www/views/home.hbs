@@ -1,49 +1,44 @@
-	
-	<section class="view">
-		{{> header}}
-		{{> sidemenu}}
-		<section class="index first-section">
-			{{!-- <a class="in-boton hook radio">
-				<img src="images/menu1.png">
-				<div class="btn-txt">
-					<h3>RADIO</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
-				</div>
-				<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
-			</a> --}}
 
-			<a class="in-boton hook radio" data-id="{{ID}}">
-				<img src="images/menu1.png">
-				<div class="btn-txt">
-					<h3>RADIO</h3>
-					<p>{{{excerpt}}}</p>
-				</div>
-				<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
-			</a>
-			<a class="in-boton hook podcasts" data-id="{{ID}}">
-				<img src="images/menu2.png">
-				<div class="btn-txt">
-					<h3>PODCASTS</h3>
-					<p>{{{excerpt}}}</p>
-				</div>
-				<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
-			</a>	
+	{{> header}}
+	{{> sidemenu}}
+	<section class="index first-section">
+		{{!-- <a class="in-boton hook radio">
+			<img src="images/menu1.png">
+			<div class="btn-txt">
+				<h3>RADIO</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
+			</div>
+			<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
+		</a> --}}
 
-			<a class="in-boton hook recent" >
-				{{# data.pool}}
-					{{# if thumb_url}}
-						<img src="{{thumb_url}}">
-					{{else}}
-						<img src="images/menu2.png">
-					{{/ if}}
-				{{/ data.pool}}
-				<div class="btn-txt">
-					<h3>LO ÚLTIMO</h3>
-				</div>
-			</a>
+		<a class="in-boton hook radio" data-id="{{ID}}">
+			<img src="images/menu1.png">
+			<div class="btn-txt">
+				<h3>RADIO</h3>
+				<p>{{{excerpt}}}</p>
+			</div>
+			<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
+		</a>
+		<a class="in-boton hook podcasts" data-id="{{ID}}">
+			<img src="images/menu2.png">
+			<div class="btn-txt">
+				<h3>PODCASTS</h3>
+				<p>{{{excerpt}}}</p>
+			</div>
+			<svg viewBox="0 0 50 50" class="white"><use xlink:href="#play"></use></svg>
+		</a>	
 
-		</section>
-	</section>
-	<section class="insert_playing">	
-		{{> nowplaying}}
+		<a class="in-boton hook recent" >
+			{{# data.pool}}
+				{{# if thumb_url}}
+					<img src="{{thumb_url}}">
+				{{else}}
+					<img src="images/menu2.png">
+				{{/ if}}
+			{{/ data.pool}}
+			<div class="btn-txt">
+				<h3>LO ÚLTIMO</h3>
+			</div>
+		</a>
+
 	</section>

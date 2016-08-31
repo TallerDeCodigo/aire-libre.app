@@ -1,43 +1,38 @@
 	
-	<section class="view">
-		{{> header}}
-		{{> sidemenu}}
-		<section class="index first-section">
-			{{!-- <a class="in-boton hook radio">
-				<img src="images/menu1.png">
-				<div class="btn-txt">
-					<h3>RADIO</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
-				</div>
-				<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
-			</a> --}}
-			
-			{{# each data.pool}}
+	{{> header}}
+	{{> sidemenu}}
+	<section class="index first-section">
+		{{!-- <a class="in-boton hook radio">
+			<img src="images/menu1.png">
+			<div class="btn-txt">
+				<h3>RADIO</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dignissim magna tempor urna condimentum.</p>
+			</div>
+			<svg viewBox="0 0 50 50" class="red"><use xlink:href="#play"></use></svg>
+		</a> --}}
+		
+		{{# each data.pool}}
 
-				{{# podcast}}
-					<a class="in-boton hook single-podcast" data-id="{{ID}}">
-						{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
-						<div class="btn-txt">
-							<h3>{{programa}} - {{title}}</h3>
-							<p>{{{excerpt}}}</p>
-						</div>
-						<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
-					</a>
-				{{/ podcast}}
+			{{# podcast}}
+				<a class="in-boton hook single-podcast" data-id="{{ID}}">
+					{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
+					<div class="btn-txt">
+						<h3>{{programa}} - {{title}}</h3>
+						<p>{{{excerpt}}}</p>
+					</div>
+					<svg viewBox="0 0 50 50" class="blue"><use xlink:href="#play"></use></svg>
+				</a>
+			{{/ podcast}}
 
-				{{# columna}}
-					<a class="in-boton hook single-column" data-id="{{ID}}" >
-						{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
-						<div class="btn-txt">
-							<h3>{{title}}</h3>
-							<p>{{{excerpt}}}</p>
-						</div>
-					</a>
-				{{/ columna}}
-			{{/ each }}
+			{{# columna}}
+				<a class="in-boton hook single-column" data-id="{{ID}}" >
+					{{# thumb_url}} <img src="{{.}}">{{/ thumb_url}}
+					<div class="btn-txt">
+						<h3>{{title}}</h3>
+						<p>{{{excerpt}}}</p>
+					</div>
+				</a>
+			{{/ columna}}
+		{{/ each }}
 
-		</section>
-	</section>
-	<section class="insert_playing">	
-		{{> nowplaying}}
 	</section>

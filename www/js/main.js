@@ -217,13 +217,13 @@
 		},
 		render_home : function(){
 			app.showLoader();
-
 			if(!loggedIn)
 					window.location.assign('login.html');
 
 			/*** First time loading home ***/
 			if(window.firstTime){
 				
+				app.showPlayerLoader();
 				app.registerTemplate('container');
 				var container_template = Handlebars.templates['container'];
 				var html 	 = container_template();
@@ -244,6 +244,7 @@
 				var data = app.gatherEnvironment(response, "Inicio");
 					data.home_active = true;
 					data.playing = true;
+					data.radio 	 = response.radio;
 					console.log(data);
 				var home_tpl = Handlebars.templates['home'];
 
@@ -271,7 +272,7 @@
 			
 		},
 		render_archive : function(kind){
-			console.log("ARchive");
+
 			app.showLoader();
 			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'feed/'+kind+'/' , function(response){
@@ -344,7 +345,7 @@
 		},
 		render_author_archive : function(){
 			app.showLoader();
-			app.registerTemplate('authors');
+			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'alphabet/terms/autor/' , function(response){
 			})
 			 .fail(function(err){
@@ -412,7 +413,7 @@
 				console.log(data);
 				var template = Handlebars.templates['column'];
 				$('.view').fadeOut('fast', function(){
-
+					$('body').scrollTop(0);
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
 													 .css("margin-left", "20px")
@@ -422,6 +423,7 @@
 													}, 240);
 				});
 				setTimeout(function(){
+
 					app.hideLoader();
 					initializeEvents();
 				}, 2000);
@@ -503,17 +505,20 @@
 			});
 		},
 		render_taxonomy : function(term_id, tax_name, targetSelector, templateName ){
+			app.showLoader();
+			app.registerTemplate(templateName);
 			$.getJSON(api_base_url+'content/taxonomy/'+tax_name+'/'+term_id)
 			 .done(function(response){
 			 	console.log(response);
 				/* Send header_title for it renders history_header */
-				var header_title = (tax_name == 'design-tools') ? 'Made with: '+response.name : response.name;
-				var data = app.gatherEnvironment(response, header_title);
-
+				var data = app.gatherEnvironment(response, response.name);
+				console.log(data);
 				var template = Handlebars.templates[templateName];
+				console.log(template(data));
 				$(targetSelector).html( template(data) );
 				setTimeout(function(){
 					app.hideLoader();
+					initializeEvents();
 				}, 2000);
 			})
 			  .fail(function(err){
@@ -522,6 +527,12 @@
 		},
 		get_file_from_device: function(destination, source){
 			apiRH.getFileFromDevice(destination, source);		
+		},
+		showPlayerLoader: function(){
+			$('#player_spinner').show();
+		},
+		hidePlayerLoader: function(){
+			$('#player_spinner').hide();
 		},
 		showLoader: function(){
 			$('#spinner').show();

@@ -4,9 +4,11 @@
 	<div class="audio-title">
 		<div class="showname">{{radio.title}} {{radio.duration}}</div>
 		{{!-- <div class="breadcrumbs">Hunting » Fishlights » Serpientes EP</div> --}}
-		{{# song}}
-			<div class="breadcrumbs">{{title}} » {{artist}} » {{album}}</div>
-		{{/ song}}
+		<div class="breadcrumbs">
+			<span id="insert_title" class="insert_here"></span>
+			<span id="insert_artist" class="insert_here"></span>
+			<span id="insert_album" class="insert_here"></span>
+		</div>
 	</div>
 	{{# if playing}}
 		<i class="material-icons">pause</i>
