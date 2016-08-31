@@ -18,6 +18,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.airelibre.app"
+        },
+        "cordova-plugin-x-socialsharing": {
+            "PACKAGE_NAME": "com.airelibre.app"
         }
     },
     "dependent_plugins": {}

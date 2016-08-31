@@ -233,16 +233,42 @@ window.initializeEvents = function(){
 				setTimeout(function() {$(".overscreen").hide();}, 600);
 			});
 
+			$('.episodio').on('click', function(){
+				$('.episodio .playing').addClass("hidden");
+				if($(this).find('.playing').hasClass('hidden'))
+					$(this).find('.playing').removeClass("hidden").css("display", "inline-block");
+				console.log('here, gonna play podcast');
+				audioLibrary.loadNewAudio($(this).data('stream'));
+				audioLibrary.playSong();
+				$('#insert_artist').text($(this).data('authors'));
+				$('.showname').text($(this).data('show')+" : "+$(this).data('episode'));
+			});
+
+			$('#pause_player').on('click', function(){
+				console.log('clicked pause');
+				app.changeStatusPlayer("paused");
+				audioLibrary.pauseSong();
+			});
+
+			$('#resume_player').on('click', function(){
+				console.log('clicked play');
+				app.changeStatusPlayer("playing");
+				audioLibrary.playSong();
+			});
+
+			$('.column_page').fitVids();
+
 		document.addEventListener("song-played", function(e) {
 			console.log(e.detail);
-			$('#insert_title').text("lol");
-			$('#insert_artist').text("The Artist");
-			$('#insert_album').text("Some Album");
 		});
 		
 		document.addEventListener("radio-started", function(e) {
 			// $('#insert_title').text("lol");
 			console.log(e.detail);
+			$('.showname').text('AL Radio');
+			$('#insert_title').text('Eniac');
+			$('#insert_artist').text('Eniac');
+			$('#insert_album').text('Eniac');
 		});
 
 	});

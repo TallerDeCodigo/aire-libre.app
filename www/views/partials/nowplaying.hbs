@@ -10,10 +10,11 @@
 			<span id="insert_album" class="insert_here"></span>
 		</div>
 	</div>
-	{{# if playing}}
-		<i class="material-icons">pause</i>
-	{{else}}
-		<i class="material-icons">play</i>
-	{{/ if}}
+	<a id="pause_player" >
+		<i class="material-icons controls playing hidden">pause</i>
+	</a>
+	<a id="resume_player" >
+		<i class="material-icons controls paused hidden">play_arrow</i>
+	</a>
 	
 </footer>

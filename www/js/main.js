@@ -237,7 +237,6 @@
 				app.toast("Failed connecting to our servers, please check your Internet connection.")
 			})
 			 .done(function(response){
-				audioLibrary.registerRadio(response.radio);
 				var data = app.gatherEnvironment(response, "Inicio");
 					data.home_active = true;
 					data.playing = true;
@@ -255,8 +254,12 @@
 														opacity: 1
 													}, 240);
 					app.showLoader();
-					app.showPlayerLoader();
+					if(window.firstTime){
+						audioLibrary.registerRadio(response.radio);
+						app.showPlayerLoader();
+					}
 				});
+
 				setTimeout(function(){
 					if(window.firstTime){
 						audioLibrary.playRadio();
@@ -293,7 +296,7 @@
 
 				var feed_tpl = Handlebars.templates['archive'];
 				$('.view').fadeOut('fast', function(){
-
+					$('body').scrollTop(0);
 					$('.view').html( feed_tpl(data) ).css("opacity", 1)
 													 .css("display", "block")
 													 .css("margin-left", "20px")
@@ -327,7 +330,7 @@
 				console.log(data);
 				var feed_tpl = Handlebars.templates['authors'];
 				$('.view').fadeOut('fast', function(){
-
+					$('body').scrollTop(0);
 					$('.view').html( feed_tpl(data) ).css("opacity", 1)
 													 .css("display", "block")
 													 .css("margin-left", "20px")
@@ -353,7 +356,7 @@
 					data.search_term = search_term;
 				var template = Handlebars.templates['archive'];
 				$('.view').fadeOut('fast', function(){
-
+					$('body').scrollTop(0);
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
 													 .css("margin-left", "40px")
@@ -409,7 +412,7 @@
 				console.log(data);
 				var template = Handlebars.templates['podcast'];
 				$('.view').fadeOut('fast', function(){
-
+					$('body').scrollTop(0);
 					$('.view').html( template(data) ).css("opacity", 1)
 													 .css("display", "block")
 													 .css("margin-left", "20px")
@@ -448,8 +451,16 @@
 				var data = app.gatherEnvironment(response, response.name);
 				console.log(data);
 				var template = Handlebars.templates[templateName];
-				console.log(template(data));
-				$(targetSelector).html( template(data) );
+				$(targetSelector).fadeOut('fast', function(){
+					$('body').scrollTop(0);
+					$(targetSelector).html( template(data) ).css("opacity", 1)
+													 .css("display", "block")
+													 .css("margin-left", "20px")
+													 .animate({
+														'margin-left': "0",
+														opacity: 1
+													}, 240);
+				});
 				setTimeout(function(){
 					app.hideLoader();
 					initializeEvents();
@@ -458,6 +469,16 @@
 			  .fail(function(err){
 				console.log(err);
 			});
+		},
+		changeStatusPlayer: function(new_status){
+			if(new_status == "paused"){
+				$('#player').find('.controls.playing').addClass('hidden');	
+				$('#player').find('.controls.paused').removeClass('hidden');
+				return;	
+			}
+			$('#player').find('.controls.paused').addClass('hidden');	
+			$('#player').find('.controls.playing').removeClass('hidden');
+			return;
 		},
 		get_file_from_device: function(destination, source){
 			apiRH.getFileFromDevice(destination, source);		
