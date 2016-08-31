@@ -257,18 +257,23 @@ window.initializeEvents = function(){
 			});
 
 			$('.column_page').fitVids();
-
-		document.addEventListener("song-played", function(e) {
-			console.log(e.detail);
-		});
 		
 		document.addEventListener("radio-started", function(e) {
-			// $('#insert_title').text("lol");
+			console.log("Event");
 			console.log(e.detail);
 			$('.showname').text('AL Radio');
 			$('#insert_title').text('Eniac');
 			$('#insert_artist').text('Eniac');
 			$('#insert_album').text('Eniac');
+		}, false);
+
+		document.addEventListener("song-played", function(e) {
+			console.log(e.detail);
+		});
+		
+
+		document.addEventListener("stream-queued", function(e) {
+			console.log(e.detail);
 		});
 
 	});

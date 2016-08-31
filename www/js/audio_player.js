@@ -17,6 +17,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 
 audioLibrary.playSong = function(buffer) {
+	console.log("Play song");
 	audioLibrary.audioElement.play();
 	app.hidePlayerLoader();
 	app.changeStatusPlayer("playing");
@@ -25,6 +26,7 @@ audioLibrary.playSong = function(buffer) {
 }
 
 audioLibrary.pauseSong = function(buffer) {
+	console.log("Pause song");
 	audioLibrary.audioElement.pause();
 	app.changeStatusPlayer("paused");
 	var event = new CustomEvent("song-paused", { "detail": "Song playback has been paused" });
@@ -39,18 +41,19 @@ audioLibrary.initPlaylist = function(buffer) {
 }
 
 audioLibrary.playRadio = function() {
+	console.log("Play radio");
+	var eventradio = new CustomEvent("radio-started", { "detail": "Radio playback has started" });
+	document.dispatchEvent(eventradio);
+	console.log("Event????");
 	audioLibrary.loadNewAudio(this.radioFile.stream);
 	audioLibrary.audioElement.play();
 	audioLibrary.radioPlaylist = this.radioFile.meta;
 	app.changeStatusPlayer("playing");
 	app.hidePlayerLoader();
-	var event = new CustomEvent("radio-started", { "detail": "Radio playback has started" });
-	document.dispatchEvent(event);
 }
 
 audioLibrary.registerRadio = function(url) {
 	this.radioFile = (this.radioFile) ? url : url;
-	console.log(this.radioFile);
 }
 
 audioLibrary.playNextSong = function(buffer) {
@@ -61,7 +64,10 @@ audioLibrary.playNextSong = function(buffer) {
 }
 
 audioLibrary.loadNewAudio =  function(url) {
+	console.log("Loading new audio");
 	audioLibrary.audioElement.setAttribute('src', url);
+	var event = new CustomEvent("stream-queued", { "detail": "New file queued for stream" });
+	document.dispatchEvent(event);
 }
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
