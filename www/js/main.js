@@ -216,14 +216,11 @@
 			
 		},
 		render_home : function(){
-			app.showLoader();
 			if(!loggedIn)
 					window.location.assign('login.html');
 
 			/*** First time loading home ***/
 			if(window.firstTime){
-				
-				app.showPlayerLoader();
 				app.registerTemplate('container');
 				var container_template = Handlebars.templates['container'];
 				var html 	 = container_template();
@@ -257,6 +254,8 @@
 														'margin-left': "0",
 														opacity: 1
 													}, 240);
+					app.showLoader();
+					app.showPlayerLoader();
 				});
 				setTimeout(function(){
 					if(window.firstTime){

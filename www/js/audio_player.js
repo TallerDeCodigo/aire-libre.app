@@ -69,7 +69,6 @@ audioLibrary.playNextSong = function(buffer) {
 }
 
 audioLibrary.loadNewAudio =  function(url) {
-	app.hidePlayerLoader();
 	var request = new XMLHttpRequest();
 	request.open('GET', url, true);
 	request.responseType = 'arraybuffer';
