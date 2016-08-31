@@ -101,7 +101,6 @@ window.initializeEvents = function(){
 					return app.render_authors();
 				if( $(this).hasClass("author") )
 					return app.render_taxonomy( $(this).data("id"), 'autor', '.view', 'archive' );
-				
 
 				// Single
 				if( $(this).hasClass("single-column") )

@@ -311,41 +311,9 @@
 			
 		},
 		render_authors : function(){
+			
 			app.showLoader();
 			app.registerTemplate('authors');
-			$.getJSON(api_base_url+'alphabet/terms/autor/' , function(response){
-			})
-			 .fail(function(err){
-				console.log(JSON.stringify(err));
-				app.hideLoader();
-				app.toast("Failed connecting to our servers, please check your Internet connection.")
-			})
-			 .done(function(response){
-			 	
-				var data = app.gatherEnvironment(response, "Autores");
-					data.home_active = true;
-				console.log(data);
-				var feed_tpl = Handlebars.templates['authors'];
-				$('.view').fadeOut('fast', function(){
-
-					$('.view').html( feed_tpl(data) ).css("opacity", 1)
-													 .css("display", "block")
-													 .css("margin-left", "20px")
-													 .animate({
-														'margin-left': "0",
-														opacity: 1
-													}, 240);
-				});
-				setTimeout(function(){	
-					app.hideLoader();
-					initializeEvents();
-				}, 2000);
-			});
-			
-		},
-		render_author_archive : function(){
-			app.showLoader();
-			app.registerTemplate('archive');
 			$.getJSON(api_base_url+'alphabet/terms/autor/' , function(response){
 			})
 			 .fail(function(err){
@@ -470,39 +438,6 @@
 			setTimeout(function(){
 				app.hideLoader();
 			}, 2000);
-		},
-		render_settings : function(){
-			/* Send header_title for it renders history_header */
-			$.getJSON(api_base_url+user+'/me/')
-			 .done(function(response){
-				var data = app.gatherEnvironment(response, "Account settings");
-				console.log(data);
-				/* Get printers and models from catalogue */
-				data.printers = app.getJsonCatalogue("pModels");
-				var parent_count = Object.keys(app.getJsonCatalogue("pModels")).length;
-				var this_brand = null;
-				data.printer_brands = [];
-				data.printer_models = [];
-				for(var i = 0; i < parent_count; i++){
-					this_brand = Object.keys(data.printers)[i];
-					data.printer_brands.push(this_brand);
-					var level_count = data.printers[this_brand].length;
-					data.printer_models[this_brand] =  [];
-					for(var j = 0; j<level_count; j++ ){
-						var this_model = data.printers[this_brand];
-						data.printer_models[this_brand].push(this_model[j]);
-					}
-				}
-				window.printers_global = data.printer_models;
-				var template = Handlebars.templates['settings'];
-				$('.main').html( template(data) );
-				setTimeout(function(){
-					app.hideLoader();
-				}, 2000);
-			})
-			  .fail(function(err){
-				console.log(err);
-			});
 		},
 		render_taxonomy : function(term_id, tax_name, targetSelector, templateName ){
 			app.showLoader();
