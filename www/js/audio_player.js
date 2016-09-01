@@ -8,6 +8,8 @@ audioLibrary.playlist 		= [];
 audioLibrary.radioPlaylist 	= [];
 audioLibrary.radioFile 		= null;
 audioLibrary.playlistPointer= null;
+audioLibrary.generalTimer 	= null;
+audioLibrary.plPointer 		= 0;
 
 audioLibrary.audioElement = document.createElement('audio');
 
@@ -44,16 +46,21 @@ audioLibrary.playRadio = function() {
 	console.log("Play radio");
 	var eventradio = new CustomEvent("radio-started", { "detail": "Radio playback has started" });
 	document.dispatchEvent(eventradio);
-	console.log("Event????");
 	audioLibrary.loadNewAudio(this.radioFile.stream);
-	audioLibrary.audioElement.play();
 	audioLibrary.radioPlaylist = this.radioFile.meta;
+	audioLibrary.audioElement.play();
 	app.changeStatusPlayer("playing");
 	app.hidePlayerLoader();
 }
 
 audioLibrary.registerRadio = function(url) {
 	this.radioFile = (this.radioFile) ? url : url;
+	var eventradio = new CustomEvent("radio-loaded", { "detail": "Radio playback has been loaded" });
+	document.dispatchEvent(eventradio);
+	audioLibrary.loadNewAudio(this.radioFile.stream);
+	audioLibrary.radioPlaylist = this.radioFile.meta;
+	app.changeStatusPlayer("paused");
+	app.hidePlayerLoader();
 }
 
 audioLibrary.playNextSong = function(buffer) {
@@ -69,6 +76,29 @@ audioLibrary.loadNewAudio =  function(url) {
 	var event = new CustomEvent("stream-queued", { "detail": "New file queued for stream" });
 	document.dispatchEvent(event);
 }
+
+audioLibrary.setGeneralTimer = function(myTimer){
+
+	var timerArray = myTimer.split(":");
+	var minutes = (timerArray[0]*60)*1000;
+	var seconds = timerArray[1]*1000;
+	this.generalTimer = minutes+seconds;
+	this.plPointer++;
+}
+
+audioLibrary.mySetTimeout = function(){
+      		
+	setTimeout( function(){
+		var context = radioPlaylist[plPointer-1];
+  		$('.showname').empty().text(context.title);
+    	$('.album').attr('src', context.cover);
+    	$('.breadcrumbs').empty().text(context.artist);
+    	var myTimer = radioPlaylist[plPointer].start;
+    	this.setGeneralTimer(myTimer);
+    	this.mySetTimeout();
+  	}, this.generalTimer);
+}
+
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();

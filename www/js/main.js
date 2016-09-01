@@ -255,16 +255,16 @@
 													}, 240);
 					app.showLoader();
 					if(window.firstTime){
-						audioLibrary.registerRadio(response.radio);
 						app.showPlayerLoader();
+						audioLibrary.registerRadio(response.radio);
 					}
 				});
 
 				setTimeout(function(){
 					if(window.firstTime){
-						audioLibrary.playRadio();
+						//audioLibrary.playRadio();
 						window.firstTime = false;
-						window.playing 	 = true;
+						window.playing = false;
 					}
 					
 					app.hideLoader();
@@ -510,4 +510,3 @@
 			return;
 		}
 	};
-

@@ -159,8 +159,8 @@ footer svg.play {right:8px;}
 .audio-title div {height:18px;line-height:18px;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .breadcrumbs {color:#ababab;font-style:italic;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .breadcrumbs .insert_here{display: inline-block;}
-.breadcrumbs .insert_here::after{content: " »"; position: relative; }
-.breadcrumbs .insert_here:last-of-type::after{content: "";}
+.breadcrumbs .insert_here:not(:empty)::after{content: " »"; position: relative; }
+.breadcrumbs .insert_here:not(:empty):last-of-type::after{content: "";}
 
 /* MENU */
 

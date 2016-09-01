@@ -91,6 +91,8 @@ window.initializeEvents = function(){
 
 				if( $(this).hasClass("recent") )
 					return app.render_archive("recent");
+				if( $(this).hasClass("radio") )
+					return audioLibrary.playRadio();
 				if( $(this).hasClass("podcast") )
 					return app.render_archive("podcast");
 				if( $(this).hasClass("columna") )
@@ -258,24 +260,39 @@ window.initializeEvents = function(){
 
 			$('.column_page').fitVids();
 		
-		document.addEventListener("radio-started", function(e) {
-			console.log("Event");
-			console.log(e.detail);
-			$('.showname').text('AL Radio');
-			$('#insert_title').text('Eniac');
-			$('#insert_artist').text('Eniac');
-			$('#insert_album').text('Eniac');
-		}, false);
-
-		document.addEventListener("song-played", function(e) {
-			console.log(e.detail);
-		});
 		
-
-		document.addEventListener("stream-queued", function(e) {
-			console.log(e.detail);
-		});
 
 	});
 
 }
+
+	document.addEventListener("radio-started", function(e) {
+		console.log("Event");
+		console.log(e.detail);
+		audioLibrary.setGeneralTimer(audioLibrary.radioPlaylist[0].start);
+	  	audioLibrary.mySetTimeout();
+	  	// TODO: Replace with dynamic name every time
+		$('.showname').text('Aire Libre Radio');
+		$('#insert_title').text('Holocene');
+		$('#insert_artist').text('Bon Iver');
+		$('#insert_album').text('');
+	}, false);
+
+	document.addEventListener("radio-loaded", function(e) {
+		console.log("Event radio loaded");
+	  	// TODO: Replace with dynamic name every time
+		$('.showname').text('Aire Libre Radio');
+		$('#insert_title').text('Holocene');
+		$('#insert_artist').text('Bon Iver');
+		$('#insert_album').text('');
+		app.hidePlayerLoader();
+	}, false);
+
+	document.addEventListener("song-played", function(e) {
+		console.log(e.detail);
+	});
+
+
+	document.addEventListener("stream-queued", function(e) {
+		console.log(e.detail);
+	});
