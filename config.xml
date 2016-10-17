@@ -24,7 +24,7 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <allow-navigation href="http://*" />
-        <allow-navigation href="http://airelibre.devtdc.online/*" />
+        <allow-navigation href="http://a2f.a8c.mwp.accessdomain.com/*" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
