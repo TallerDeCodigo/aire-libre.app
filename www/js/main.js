@@ -21,7 +21,7 @@
 			$.ajaxSetup({
 				 async: false
 			});
-			window.loggedIn = false;
+			window.loggedIn = true;
 			app.registerCompiledPartials();
 			app.registerHelpers();
 			/* localStorage init */
@@ -109,17 +109,17 @@
 			// 	return;
 			// }
 			// window.history.back();
-			var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-		    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
+			// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+		 //    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
 		        // IOS DEVICE
-		        history.go(-1);
-		    } else if (userAgent.match(/Android/i)) {
+		    //     history.go(-1);
+		    // } else if (userAgent.match(/Android/i)) {
 		        // ANDROID DEVICE
-		        navigator.app.backHistory();
-		    } else {
+		        // navigator.app.backHistory();
+		    // } else {
 		        // EVERY OTHER DEVICE
-		        history.go(-1);
-		    }
+		        // history.go(-1);
+		    // }
 		},
 
 		// deviceready Event Handler

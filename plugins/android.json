@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.oauthio.plugins.oauthio": {
+            "PACKAGE_NAME": "com.airelibre.app"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "com.airelibre.app"
         },
@@ -20,9 +23,6 @@
             "PACKAGE_NAME": "com.airelibre.app"
         },
         "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.airelibre.app"
-        },
-        "com.oauthio.plugins.oauthio": {
             "PACKAGE_NAME": "com.airelibre.app"
         }
     },
