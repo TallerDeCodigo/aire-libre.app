@@ -103,23 +103,24 @@
 			document.addEventListener('mobileinit', app.onDMobileInit, false);
 		},
 		onBackButton: function(){
+
 			// if(navigator.app){
-			// 	console.log('Back button navigator');
+			// 	console.log('Adiós!');
 			// 	navigator.app.backHistory();
 			// 	return;
 			// }
 			// window.history.back();
 			// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 		 //    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
-		        // IOS DEVICE
-		    //     history.go(-1);
-		    // } else if (userAgent.match(/Android/i)) {
-		        // ANDROID DEVICE
-		        // navigator.app.backHistory();
-		    // } else {
-		        // EVERY OTHER DEVICE
-		        // history.go(-1);
-		    // }
+		 //        IOS DEVICE
+		 //        history.go(-1);
+		 //    } else if (userAgent.match(/Android/i)) {
+		 //        ANDROID DEVICE
+		 //        navigator.app.backHistory();
+		 //    } else {
+		 //        EVERY OTHER DEVICE
+		 //        history.go(-1);
+		 //    }
 		},
 
 		// deviceready Event Handler
@@ -139,10 +140,34 @@
 				app.toast("Oauth error ocurred");
 				console.log('OAuth initialize error: ' + err);
 			}
-			var backButtonElement = document.getElementById("backBtn");
-			if(backButtonElement)
-				backButtonElement.addEventListener("click", app.onBackButton, false);
-			return;
+			// var backButtonElement = document.getElementById("backBtn");
+			// if(backButtonElement)
+			// 	backButtonElement.addEventListener("click", app.onBackButton, false);
+			// return;
+
+			document.addEventListener("backbutton", onBackKeyDown, false);
+
+			function onBackKeyDown() {
+
+				// var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+			 //    if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i) || userAgent.match(/iPod/i)) {
+			 //        // IOS DEVICE
+			 //        history.go(-1);
+			 //    } else if (userAgent.match(/Android/i)) {
+			 //        // ANDROID DEVICE
+			 //        navigator.app.backHistory();
+			 //    } else {
+			 //        // EVERY OTHER DEVICE
+			 //        history.go(-1);
+			 //    }
+			    
+			backAsHome.trigger(function(){
+			        console.log("Success");
+			    }, function(){
+			        console.log("Error");
+			    });
+				
+			}
 		},
 
 		// deviceready Event Handler

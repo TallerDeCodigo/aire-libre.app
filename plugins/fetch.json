@@ -47,5 +47,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "com.amitsinha.backashome": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/amitsinha559/cordova-plugin-back-as-home.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

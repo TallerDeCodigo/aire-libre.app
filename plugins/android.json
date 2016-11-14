@@ -24,6 +24,9 @@
         },
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.airelibre.app"
+        },
+        "com.amitsinha.backashome": {
+            "PACKAGE_NAME": "com.airelibre.app"
         }
     },
     "dependent_plugins": {}

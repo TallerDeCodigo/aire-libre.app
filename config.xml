@@ -21,6 +21,8 @@
     <access origin="https://*.googleapis.com" />
     <access origin="https://*.gstatic.com" />
 
+    <icon src="res/icon.png" />
+
     <platform name="android">
         <allow-intent href="market:*" />
         <allow-navigation href="http://*" />
@@ -31,7 +33,13 @@
         <allow-intent href="itms-apps:*" />
     </platform>
 
-    
+    <platform name="android">
+        <splash src="res/splash/1.png" density="port-hdpi"/>
+        <splash src="res/splash/2.png" density="port-ldpi"/>
+        <splash src="res/splash/3.png" density="port-mdpi"/>
+        <splash src="res/splash/4.png" density="port-xhdpi"/>
+    </platform>
+
     <preference name="Orientation" value="portrait" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="1500"/>
